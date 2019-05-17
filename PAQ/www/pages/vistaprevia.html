@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../css/vistaprevia.css">
+    <link rel="stylesheet" type="text/css" href="../css/PAQ.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="superior">
+            <div class="text">
+                <p>Juan</p>
+            </div>
+            <div class="logo">
+                <img src="../img/usuario.1.svg">
+            </div>
+        </div>
+        <div class="contenido">
+
+            
+        </div>
+    </div>
+    <script type="text/javascript" src="../cordova.js"></script>
+    <script src="../js/jquery2.js"></script>
+    <script>
+        var usuario = localStorage.getItem('usuario') !== null ? JSON.parse(localStorage.getItem('usuario')) : JSON.parse(sessionStorage.getItem('usuario'));
+
+        var tramo1 = JSON.parse(sessionStorage.getItem('tramo1'));
+        var tramo2 = JSON.parse(sessionStorage.getItem('tramo2'));
+        var c = document.getElementsByClassName('contenido')[0];
+        var v;
+        if (tramo1 !== null && tramo1 !== undefined) {
+            v = `
+            <div class="vista">
+                <span><b>Desde:</b> ${tramo1.desde} - ${tramo1.hasta}</span><br>
+                ${linea(tramo1.fecha)}
+                <span><b>Peso:</b> ${tramo1.peso} Lbs</span><br>
+                <span><b>Dimenciones:</b> ${tramo1.alto} Cm/ ${tramo1.ancho} Cm / ${tramo1.profundidad} Cm</span><br>
+            </div>`;
+            c.innerHTML += v;
+        }
+
+        if (tramo2 !== null && tramo2 !== undefined) {
+            v = `
+            <div class="vista">
+                <span><b>Desde:</b> ${tramo2.desde} - ${tramo2.hasta}</span><br>
+                ${linea(tramo2.fecha)}
+                <span><b>Peso:</b> ${tramo2.peso} Lbs</span><br>
+                <span><b>Dimenciones:</b> ${tramo2.alto} Cm/ ${tramo2.ancho} Cm / ${tramo2.profundidad} Cm</span><br>
+            </div>`;
+            c.innerHTML += v;
+        }
+        sessionStorage.clear();
+        c.innerHTML += '<a id="aceptar">Aceptar</a>';
+
+        document.addEventListener('deviceready', () => {
+            document.getElementById('aceptar').addEventListener('click', () => {
+                $.post('http://paq.web-informatica.info/Rest_PAQ/viaje',{idUsuario: usuario.id} ,function(data){
+                    if(tramo1 !== null && tramo1 !== undefined){
+                        tramo1.idViaje = data;
+                        tramo1.fecha_hora = tramo1.fecha
+                        tramo1.numero = 'tramo 1';
+                        delete tramo1.fecha;
+                        $.post('http://paq.web-informatica.info/Rest_PAQ/tramo',tramo1,d => console.log(d));
+                    }
+                    if(tramo2 !== null && tramo2 !== undefined){
+                        tramo2.idViaje = data;
+                        tramo2.fecha_hora = tramo2.fecha
+                        tramo2.numero = 'tramo 2';
+                        delete tramo2.fecha;
+                        $.post('http://paq.web-informatica.info/Rest_PAQ/tramo',tramo2,d => console.log(d));
+                        window.location = "viajes.html";
+                    } else window.location = "viajes.html";
+                });
+            });
+        });
+
+        function mes(index) {
+            var meses = Array.of('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+            return meses[index];
+        }
+
+        function linea(fecha) {
+            dateTime = fecha.split(" ");
+
+            var date = dateTime[0].split("/");
+            var yyyy = date[0];
+            var mm = date[1];
+            if(mm.length == 2){
+                mm = mm[0]==0 ? mm[1] : mm;
+            }
+            var dd = date[2];
+
+            return `<span><b>Fecha:</b> ${dd} de ${mes(mm)}-${yyyy}</span><br>`;
+        }
+    </script>
+</body>
+
+</html>

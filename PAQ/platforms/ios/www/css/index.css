@@ -1,0 +1,66 @@
+.icon{
+    width: 50px;
+    height: 50px;
+    border: 1px solid white;
+    border-radius: 100%;
+}
+
+.icon img{
+    margin-top: 17%;
+    width:60%;
+    height:60%;
+}
+
+.contenedor{
+    width: 100%;
+    height: 100%;
+}
+
+.contenido{
+    text-align: center;
+}
+ 
+.header{
+    margin-top: 5%;
+    margin-bottom: 15%;
+}
+
+.header .icon{
+    border:none;
+    margin-left: 45%;
+    margin-bottom:10%; 
+}
+
+.header .icon img{
+    width:100%;
+    height:100%;
+}
+
+.opciones{
+    display: flex;
+    color: white;
+}
+
+.opcion:first-child{
+    margin-right: 3.5%;
+}
+
+.opcion{
+    padding: 5%;
+    text-align: center;
+    display: block;
+    width: 46.5%;
+    background: DodgerBlue;
+}
+
+.opcion .icon{
+    margin-left: 32%;
+    margin-bottom: 8%;
+}
+
+.opcion a{
+    color:DodgerBlue;
+    background: white;
+    border-radius: 10px;
+    padding:4% 6% 3% 6%;;
+}

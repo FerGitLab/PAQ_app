@@ -1,0 +1,96 @@
+.superior{
+    background: #47aad1;
+    height: 400px;
+    z-index: 1;
+}
+.contenedor{
+    width: 100%;
+}
+
+.contenido{
+    width: 90%;
+    border: 1px solid #bdcacf;
+    z-index: 1;
+    background: white;
+    border-radius: 15px;
+    margin-left: 5%;
+    margin-top: -95%;
+}
+
+
+/*contenido*/
+.logo{
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 5%;
+}
+
+.logo img {
+    width: 90%;
+}
+
+.texto{
+    width: 80%;
+}
+
+#aceptar{
+    color: white;
+    border-radius: 10px;
+    padding: 2% 6% 2% 6%;
+    width: 70%;
+    display: block;
+    background: #47aad1;
+    margin-top: 12%;
+    margin-bottom: 5%; 
+}
+
+h4{
+    color: #47aad1;
+    text-align: center;
+}
+
+.icono{
+    width: 20%;
+    margin-left: 40%;
+    margin-bottom: 2%;
+}
+
+.archivo{
+    width: 80%;
+    margin-left: -5.5%;
+    margin-top: 3%;
+    margin-bottom: 15%;
+}
+.archivo input:first-child{
+    width: 60%;
+    padding: 2.5%;
+    margin-left: 20%;
+    border-radius: 10px;
+    border: 1px solid lightgray; 
+}
+
+.archivo input:last-child{
+    border-radius: 0px 10px 10px 0px;
+    width: 7%;
+    border: 1px solid lightgray;
+    padding: 1.5%;
+    font-size: 16px;
+}
+
+#siguiente{
+    color: white;
+    border-radius: 10px;
+    padding: 2% 6% 2% 6%;
+    width: 20%;
+    display: block;
+    margin: 0 auto;
+    background: #47aad1;
+    margin-top: -6%;
+    margin-bottom: 5%; 
+}
+
+p{
+    color: #47aad1;
+    font-size: 15px;
+    text-align: center;
+}

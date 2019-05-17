@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/PAQ.css">
+    <link rel="stylesheet" href="../css/menuCliente.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="superior"></div>
+        <div class="contenido">
+            <div class="opciones">
+                <div class="opcion">
+                    <div class="imagen">
+                        <img src="../img/carrito.svg">
+                    </div>
+                    <div class="boton">
+                        <p>Enviar una compra</p>
+                        <a id="compras">Continuar</a>
+                    </div>
+                </div>
+                <div class="opcion">
+                    <div class="imagen">
+                        <img src="../img/portfolio.svg">
+                    </div>
+                    <div class="boton">
+                        <p>Mis paquetes</p>
+                        <a id="envios">Continuar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../cordova.js"></script>
+    <script>
+        let app = {
+            init: function () {
+                
+                /*document.getElementById('compras').addEventListener('click', () => {
+                    window.location = 'caracteristicas.html';
+                });*/
+                document.getElementById('compras').addEventListener('click', () => {
+                    window.location = 'caracteristicas.html';
+                });
+
+                document.getElementById('envios').addEventListener('click', () => {
+                    window.location = 'envios.html';
+                });
+            }
+        };
+        
+        document.addEventListener('deviceready', app.init);
+    </script>
+</body>
+
+</html>

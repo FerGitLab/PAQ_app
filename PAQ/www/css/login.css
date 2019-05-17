@@ -1,0 +1,182 @@
+.contenido {
+    width: 85%;
+    z-index: 2;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin-top: 14%;
+    position: relative;
+    background: white;
+}
+
+.imagen {
+    margin-top: -14%;
+    width: 40%;
+    z-index: 2;
+    background: white;
+}
+
+.imagen img {
+    width: 100%;
+}
+
+h4 {
+    color: #47aad1;
+    text-align: center;
+    margin-bottom: 10%;
+}
+
+input::placeholder {
+    color: lightblue;
+}
+
+input {
+    width: 75%;
+    display: block;
+    margin-top: 5%;
+    padding: 2.5%;
+    border: 1px solid lightblue;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.recordar {
+    width: 70%;
+}
+
+/*Checkbox*/
+
+/* custom checkbox */
+
+.checkbox {
+    display: block;
+    position: relative;
+    padding-left: 19px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 12px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* hide the browser's default checkbox */
+
+.checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* create custom checkbox */
+
+.check {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 10px;
+    width: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+/* on mouse-over, add border color */
+
+.checkbox input:hover~.check {
+    border: 2px solid #47aad1;
+}
+
+/* add background color when the checkbox is checked */
+
+.checkbox input:checked~.check {
+    background-color: white;
+    border: 0.3px solid lightgray;
+}
+
+/* create the checkmark and hide when not checked */
+
+.check:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* show the checkmark when checked */
+
+.checkbox input:checked~.check:after {
+    display: block;
+}
+
+/* checkmark style */
+
+.checkbox .check:after {
+    left: 4px;
+    top: -4.5px;
+    width: 3px;
+    height: 11px;
+    border: solid #47aad1;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/*Checkbox*/
+
+.eye{
+    width: 8%;
+    z-index: 2;
+    margin-top: -9%;
+    margin-left: 80%;
+    color: #47aad1;
+}
+
+.ojo{
+    fill: #47aad1;
+}
+
+.eye:active{
+    transform: translateY(3px)
+}
+.eye img{
+    width: 100%;
+}
+
+.boton{
+    width: 80%;
+}
+
+.boton a{
+    margin-top: 8%;
+    margin-bottom: 5%;
+    display: block;
+    padding: 2% 6% 2% 6%;
+    border: 1px solid lightgray;
+    border-radius: 15px;
+    background: #47aad1;
+    color: white;
+    width: 35%;
+}
+
+.reset{
+    font-size: 13px;
+    text-align: center;
+    margin-top: 8%;
+    margin-bottom: 5%;
+    cursor: pointer;
+}
+
+.reset2{
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 15%;
+    margin-top: 3%;
+    cursor: pointer;
+}
+
+.inferior{
+    z-index: 1;
+    height: 230px;
+    background: #47aad1;
+    margin-top: -28%;
+}

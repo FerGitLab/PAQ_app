@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/PAQ.css">
+    <link rel="stylesheet" href="../css/finproceso.css">
+    <title>Terminos</title>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="barra"></div>
+        <div class="contenido">
+            <div class="logo">
+                <img src="../img/logo.png">
+            </div>
+            <h4>Bienvenido a PAQ</h4>
+            <img class="icono" src="../img/win.svg">
+            <p>Felicidades tus datos han sido verificados por favor ingresa a la
+                seccion de registros de viajes para poder comenzar a recibir paquetes</p>
+        </div>
+        <div class="boton">
+            <a id="siguiente">Finalizar</a>
+        </div>
+    </div>
+    <script src="../cordova.js"></script>
+    <script>
+        document.addEventListener('deviceready', () => {
+            document.getElementById('siguiente').addEventListener('click', () => {
+                var usuario = JSON.parse(localStorage.getItem('usuario'));
+                var form = new FormData();
+                form.append('nombres', usuario.nombre);
+                form.append('apellidos', usuario.apellido);
+                form.append('direccion', usuario.direccion);
+                form.append('estado', 1);
+                form.append('idRol', usuario.idRol);
+                form.append('perfil', usuario.perfil);
+                form.append('dui', usuario.DUI);
+                form.append('celular', usuario.celular)
+                form.append('usuario', usuario.usuario)
+                form.append('contrasena', usuario.contrasena)
+                form.append('correo', usuario.correo)
+                form.append('DUI_img', usuario.dui)
+                form.append('pasaporte_img', usuario.pasaporte_img)
+
+                let guardar = new XMLHttpRequest();
+                guardar.open('post', 'http://paq.web-informatica.info/Rest_PAQ/users');
+                guardar.onload = () => {
+                    var res = JSON.parse(guardar.responseText);
+                    if (guardar.readyState == 4 && guardar.status == '200') {
+                        console.log(res); debugger
+                        usuario.id = res;
+                        localStorage.setItem('usuario',JSON.stringify(usuario));
+                        window.plugins.toast.showWithOptions(
+                            {
+                                message: res,
+                                duration: 4000,
+                                position: 'center'
+                            }
+
+                        );
+                        if (usuario.idRol == 2) {
+                            localStorage.setItem('cliente', 'true');
+                            window.location.replace("menuCliente.html");
+                        } else {
+                            localStorage.setItem('paquer', 'true');
+                            window.location.replace("menuPaquer.html");
+                        }
+                    }
+                }
+                guardar.send(form);
+
+            });;
+        });
+    </script>
+</body>
+
+</html>

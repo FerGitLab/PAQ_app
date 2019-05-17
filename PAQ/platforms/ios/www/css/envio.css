@@ -1,0 +1,60 @@
+.body{
+  width:100%;
+  height: 100%;
+}
+.contenedor{
+  width:100%;
+  height:100%;
+}
+
+.contenido{
+  background: white;
+  width:80%;
+  margin-left: 8%;
+  z-index:2;
+  position:absolute;
+}
+
+.camara{
+  margin-top:12%;
+  margin-left:15% ;
+  width:70%;
+}
+
+.opciones{
+  padding:2%;
+  color:DodgerBlue;
+  margin: 0 auto;
+  width:80%;
+}
+
+.opciones input{
+  padding:5px;
+  border: 1px solid DodgerBlue;
+  border-radius:10px;
+  width:90%;
+  margin-top: -1%;
+}
+
+.opciones a{
+  width:40%;
+  margin-left: 26%;
+  display:block;
+  background: DodgerBlue;
+  color: white;
+  padding: 2%;
+  border-radius: 20px;
+}
+
+.footer{
+  margin-top: 57%;
+  width:100%;
+  height:330px;
+  background:DodgerBlue;
+  z-index:1;
+}
+
+.titulo{
+  text-align: center;
+  color: black;
+}

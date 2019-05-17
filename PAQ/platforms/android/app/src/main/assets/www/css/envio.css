@@ -1,0 +1,104 @@
+.body {
+  width: 100%;
+  height: 100%;
+}
+
+.contenedor {
+  width: 100%;
+  height: 100%;
+}
+
+.contenido {
+  background: white;
+  width: 80%;
+  margin-left: 8%;
+  z-index: 2;
+  position: absolute;
+  border-radius: 13px;
+}
+
+.img {
+  margin-top: 12%;
+  margin-left: 25%;
+  width: 45%;
+  filter: drop-shadow(2px 20px 10px gray)
+}
+
+.camara {
+  width: 100%;
+}
+
+.opciones {
+  padding: 2%;
+  color: #47aad1;
+  width: 90%;
+}
+
+.caja {
+  margin-top: 5%;
+  width: 100%;
+  box-shadow: 5px 5px 8px -1px #222;
+  border-radius: 13px 13px 13px 13px;
+}
+
+.opciones input {
+  padding: 5px;
+  border: 1px solid DodgerBlue;
+  border-radius: 10px;
+  width: 90%;
+  margin-top: -1%;
+}
+
+.opciones a {
+  width: 40%;
+  display: block;
+  background: #47aad1;
+  color: white;
+  padding: 2% 4% 2% 7%;
+  border-radius: 20px;
+}
+
+.footer {
+  margin-top: 57%;
+  width: 100%;
+  height: 330px;
+  background: #47aad1;
+  z-index: 1;
+}
+
+.titulo {
+  text-align: center;
+  color: black;
+}
+
+select option {
+  outline: none;
+}
+
+select option {
+  background: #0000;
+}
+
+select:focus {
+  outline: none
+}
+
+select:-moz-focusring{
+  outline: none
+}
+
+select {
+  border: 0;
+  margin-top: 1.5%;
+  overflow: hidden;
+  -webkit-appearance: button;
+  -webkit-user-select: none;
+  padding: 3%;
+  outline: 0;
+  background-image: none;
+  user-select: none;
+  font-size: 15px;
+  background: #47aad1;
+  color: white;
+  box-shadow: none;
+}

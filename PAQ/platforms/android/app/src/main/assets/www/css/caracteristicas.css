@@ -1,0 +1,60 @@
+.fondo{
+    width: 100%;
+    background: #47aad1;
+    height: 245px;
+    z-index: 1;
+}
+
+.contenido{
+    
+    color: white;
+    text-align: center;
+    z-index: 2;
+    width: 90%;
+    position: absolute;
+    margin-top: -52%;
+    margin-left: 4%;
+}
+
+.contenido input{
+    width: 95%;
+    padding: 2%;
+    border-radius: 15px;
+    border: 1px solid #47aad1;
+}
+
+.contenido a{
+    color: #47aad1;
+    background: white;
+    border-radius: 15px;
+    padding: 1.5% 5% 1.5% 5%;
+}
+
+.caracteristicas{
+    color: #47aad1;
+    width: 100%;
+    background: white;
+    border-radius: 15px;
+    box-shadow: -1px 1px 10px 2px #8888;
+}
+
+.caracteristicas img{
+    margin-top: 5%;
+   width: 15%;
+}
+
+.caracteristicas h3{
+    color: black;
+}
+
+.caracteristicas input{
+    width: 35%;
+    margin: 3%;
+}
+
+.caracteristicas a{
+    margin-bottom: 4%;
+    color: white;
+    background: #47aad1;
+    padding: 1.5% 9% 1.5% 9%;
+}

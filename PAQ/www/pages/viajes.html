@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/PAQ.css">
+    <link rel="stylesheet" href="../css/viajes.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="superior"></div>
+        <div class="contenido">
+
+        </div>
+        <div class="boton"><a class="siguiente" id="siguiente">Agregar viaje</a></div>
+    </div>
+    <script src="../cordova.js"></script>
+    <script>
+        try {
+            var usuario = localStorage.getItem('usuario') !== null ? JSON.parse(localStorage.getItem('usuario')) : JSON.parse(sessionStorage.getItem('usuario'));
+        } catch (e) {
+            console.log(e);
+        }
+        var c = document.getElementsByClassName('contenido')[0];
+        var i;
+        fetch(`http://paq.web-informatica.info/Rest_PAQ/viaje/usuario/${usuario.id}`)
+            .then(data => data.json())
+            .then(data => {
+                var i = 0;
+                var j = 0;
+                if (data.length > 0) {
+                    data.forEach((v, indice) => {
+                        var p = new XMLHttpRequest();
+                        p.open('GET', `http://paq.web-informatica.info/Rest_PAQ/extras/tramos/${v.id}`);
+                        p.onload = function () {
+
+                            if (p.readyState == 4 && p.status == 200) {
+                                var res = JSON.parse(p.responseText);
+                                var json = res;
+                                c.innerHTML += `<h3>Viaje ${++j}</h3><br>`;
+                                res.map(r => {
+                                    c.innerHTML += `
+                            <div class="tramo">
+                                <span><b>${r.numero}</b></span><br>
+                                <span><b>Desde:</b> ${r.desde} - ${r.hasta}</span><br>
+                                ${linea(r.fecha_hora)}
+                            </div>`;
+                                });
+
+                            }
+                        }
+                        p.send();
+                        i = indice;
+                    });
+                } else {
+                    c.innerHTML += '<h3 class="mensaje">No tienes ningun viaje aun</h3>';
+                }
+                if (i == (data.length - 1) || data.length == 0) {
+                    document.addEventListener('deviceready', () => {
+                        document.getElementById('siguiente').addEventListener('click', () => {
+                            window.location = "addViaje.html";
+                        });;
+                    });
+                }
+            });
+
+        /* 
+            */
+        function mes(index) {
+            var meses = Array.of('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+            return meses[index];
+        }
+
+        function linea(fecha) {
+            dateTime = fecha.split(" ");
+
+            var date = dateTime[0].split("-");
+            var yyyy = date[0];
+            var mm = date[1] - 1;
+            var dd = date[2];
+
+            return `<span><b>Fecha:</b> ${dd} de ${mes(mm)}-${yyyy}</span><br>`;
+        }
+    </script>
+</body>
+
+</html>

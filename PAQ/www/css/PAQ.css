@@ -1,0 +1,31 @@
+@font-face {
+  font-family: fuentePAQ;
+  src: url('../fonts/Raleway-Medium.ttf');
+}
+
+* {
+  font-family: 'fuentePAQ';
+  margin: 0 auto;
+}
+
+.barra {
+  background: #47aad1;
+  width: 100%;
+  height: 35px;
+}
+
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+*:focus {
+  outline: none;
+}
+a{
+  cursor: pointer;
+}
+a:active{
+  transform: translateY(4px);
+}

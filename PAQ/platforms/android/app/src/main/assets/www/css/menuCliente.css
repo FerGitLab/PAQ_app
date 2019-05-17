@@ -1,0 +1,52 @@
+.superior{
+    width: 100%;
+    height: 100px;
+    background: #47aad1;
+}
+
+.contenido{
+    width: 90%;
+}
+
+.opcion{
+    color: white;
+    text-align: center;
+    width: 45%;
+    border: 1px solid lightgray;
+    background: #47aad1;
+    padding: 8% 3% 8% 3%;
+    border-radius: 15px;
+    box-shadow: 2px 3px 8px -3px black; 
+}
+
+.opcion:first-child{
+    margin-top: 10%;
+    margin-bottom: 5%;
+}
+
+.opcion:last-child .imagen{
+    padding: 4%;
+}
+
+.opcion .imagen{
+    width: 25%;
+    border: 3px solid white;
+    border-radius: 100%;
+    padding: 6% 4% 1% 3%;
+    margin-bottom: 7%;
+}
+
+.opcion .imagen img {
+    width: 100%;
+    display: block;
+}
+
+.opcion .boton a{
+    display: block;
+    background: white;
+    color: #47aad1;
+    padding: 2% 6% 2% 6%;
+    margin-top: 10%;
+    width: 60%;
+    border-radius: 15px;
+}

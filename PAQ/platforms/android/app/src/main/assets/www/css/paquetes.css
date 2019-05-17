@@ -1,0 +1,80 @@
+.contenido{
+    width: 80%;
+    z-index: 2;
+    border: 1px solid lightgray;
+    position: relative;
+    background: white;
+    margin-top: 16%;
+    border-radius: 15px;
+}
+
+.inferior{
+    width: 100%;
+    height: 250px;
+    margin-top: -40%;
+    z-index: 1;
+    background: #47aad1;
+}
+
+.logo{
+    width: 45%;
+    z-index: 3;
+    margin-top: -16%;
+    background: white;
+}
+
+.logo img{
+    width: 100%;
+}
+
+.paquete{
+    border-radius: 8px;
+    box-shadow: 1px 2px 6px -2px ;
+    width: 80%;
+    display: flex;
+    margin-bottom: 5%;
+    padding: 2% 2% 6% 0%;
+}
+
+.paquete .img {
+    border-radius: 100%;
+    border: 1px solid #47aad1;
+    width: 15%;
+    margin-top: 2%;
+    margin-left: 6%;
+}
+
+.paquete .img img{
+    padding: 10%;
+    width: 65%;
+    display: block;
+}
+
+.texto{
+    margin-top: 5%;
+    width: 60%;
+}
+
+.arrow{
+    width: 7%;
+    margin-top: 10%;
+    margin-bottom: -20%;
+}
+
+.arrow img {
+    width: 100%;
+}
+
+.flecha{
+    width: 10%;
+}
+
+.flecha img{
+    width: 100%;
+}
+#paquetes h3{
+    color: #47aad1;
+    text-align: center;
+    width: 75%;
+    margin-bottom: 5%;
+}

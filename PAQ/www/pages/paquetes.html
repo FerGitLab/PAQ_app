@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/PAQ.css">
+    <link rel="stylesheet" href="../css/paquetes.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="barra"></div>
+        <div class="contenido">
+            <div class="logo">
+                <img src="../img/logo.png">
+            </div>
+            <div id="paquetes">
+
+            </div>
+            <div class="flecha">
+                <img src="../img/arrow.svg">
+            </div>
+        </div>
+        <div class="inferior"></div>
+    </div>
+    <script src="../cordova.js"></script>
+    <script src="../js/paquetes.js"></script>
+    <script>
+        var u = JSON.parse(localStorage.getItem('usuario'));
+        var i = 0;
+        fetch(`http://paq.web-informatica.info/Rest_PAQ/notificacion/viajes/${u.id}`).then(data => data.json()).then(data => {
+            if (data.length > 0) {
+                data.map(e => {
+                    console.log(e);
+                    fetch(`http://paq.web-informatica.info/Rest_PAQ/notificacion/byuser/${e.id}`).then(data => data.json()).then(data => {
+
+                        data.map(n => {
+                            console.log(n);
+                            document.getElementById('paquetes').innerHTML +=
+                                `
+                            <div id="paquete" class="paquete" onclick="validar(${n.id})">
+                                <div class="img"><img src="../img/portfolio.1.svg"></div>
+                                <span class="texto">Paquete ${++i}</span>
+                                <div class="arrow"><img src="../img/arrow.svg"></div>
+                            </div>
+                            `;
+                        });
+                    });
+                });
+            }
+            else {
+                document.getElementById('paquetes').innerHTML +=
+                    `
+                    <h3>No tienes ninguna solicitud de envio</h3>
+                    `;
+            }
+        });
+
+        function validar(id) {
+            var u = JSON.parse(localStorage.getItem('usuario'));
+            fetch(`http://paq.web-informatica.info/Rest_PAQ/notificacion/${id}`).then(data => data.json()).then(data => {
+                console.log(data);
+                fetch(`http://paq.web-informatica.info/Rest_PAQ/envio/${data.idEnvio}`).then(d => d.json()).then(d => {
+                    console.log(d);
+                    if (d.idPaquer == u.id) window.location = `chat.html`;
+                    else if (d.idPaquer == 0 && d.idViaje == 0) window.location = `aceptarPaquete.html?idDetalle=${data.idEnvio}&id=${data.id}`;
+                    else alert('El paquete ya ha sido aceptado'), history.back();
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

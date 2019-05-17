@@ -1,0 +1,87 @@
+.superior{
+    width: 100%;
+    height: 250px;
+    background: #47aad1;
+    z-index: 1;
+}
+
+.contenido{
+    color: white;
+    margin-top: -30%;
+    width: 90%;
+    height: 200px;
+    text-align: center;
+}
+
+.contenido p{
+    margin-bottom: 3%;
+}
+
+.conten{
+    font-weight: bold;
+    color: #47aad1;
+    background: white;
+    border: 1px solid lightgray;
+    width: 100%;
+    border-radius: 20px;
+}
+
+.img{
+    margin-top: 3%;
+    width: 15%;
+}
+
+.datos{
+    width: 90%;
+    margin-bottom: 8%;
+}
+
+.datos div{
+    display: inline-block;
+    margin: 1%;
+    border: 1px solid #47aad1;
+    border-radius: 10px;
+    width: 41%;
+    padding: 2% 0% 2% 2%;
+    box-shadow: 0px 0px 4px -2px;
+    margin: 2%;
+}
+
+
+
+.datos div span{
+    width: 75%;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.datos div .arrow{
+    display: inline-block;
+    width: 10%;
+    border: none;
+    box-shadow: none;
+}
+
+.arrow img{
+    width: 100%;
+}
+
+.producto{
+    width: 50%;
+    margin-bottom: 12%;
+}
+
+.producto img{
+    width: 60%;
+    filter: drop-shadow(2px 20px 10px gray);
+    display: block;
+}
+
+.boton{
+    margin-top: 9%;
+}
+.boton a{
+    border-radius: 16px;
+    background: #47aad1;
+    padding: 1% 12% 1% 12%;
+}

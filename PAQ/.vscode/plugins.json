@@ -1,0 +1,1 @@
+{"plugins":["cordova-plugin-splashscreen","cordova-plugin-camera","cordova-plugin-dialogs","cordova-plugin-filechooser","cordova-plugin-x-toast","cordova-support-google-services","cordova-plugin-device","cordova-plugin-badge","phonegap-plugin-local-notification","card.io.cordova.mobilesdk","cordova-plugin-whitelist","cordova-plugin-barcodescanner","cordova-plugin-compat"]}

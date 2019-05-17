@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/PAQ.css">
+    <link rel="stylesheet" href="../css/addViajes.css">
+    <link rel="stylesheet" href="../css/jquery-ui.css">
+    <link rel="stylesheet" href="../css/jquery.datetimepicker.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="contenido">
+            <div class="tramo">
+                <h5>Tramo 1</h5>
+                <form id="tramo1">
+                    <input type="text" class="required" name="hasta" placeholder="Hasta">
+                    <input type="text" class="required" name="desde" placeholder="Desde">
+                    <input type="text" name="fecha" id="uno" placeholder="Fecha de viaje">
+                    <p>Espacio disonible</p>
+                    <div class="down">
+                        <img src="../img/arrow.svg">
+                    </div>
+                    <div class="espacio">
+                        <input type="number" class="required" name="peso" id="peso" placeholder="Peso">
+                        <input type="number" class="required" name="alto" id="alto" placeholder="Alto">
+                        <input type="number" class="required" name="ancho" id="ancho" placeholder="Ancho">
+                        <input type="number" class="required" name="profundidad" id="profundidad"
+                            placeholder="Profundidad">
+                    </div>
+                </form>
+            </div>
+            <div class="tramo">
+                <h5>Tramo 2</h5>
+                <form id="tramo2">
+                    <input type="text" class="required" name="hasta" placeholder="Hasta">
+                    <input type="text" class="required" name="desde" placeholder="Desde">
+                    <input type="text" name="fecha" id="dos" placeholder="Fecha de viaje">
+                    <p>Espacio disonible</p>
+                    <div class="down">
+                        <img src="../img/arrow.svg">
+                    </div>
+                    <div class="espacio">
+                        <input type="number" class="required" name="peso" id="peso" placeholder="Peso">
+                        <input type="number" class="required" name="alto" id="alto" placeholder="Alto">
+                        <input type="number" class="required" name="ancho" id="ancho" placeholder="Ancho">
+                        <input type="number" class="required" name="profundidad" id="profundidad"
+                            placeholder="Profundidad">
+                    </div>
+                </form>
+            </div>
+            <div class="botones">
+                <a id="boleto">Subir boleto</a>
+                <a id="vista">AGREGAR VIAJE</a>
+            </div>
+        </div>
+        <div class="inferior"></div>
+    </div>
+    <script src="../cordova.js"></script>
+    <script src="../js/addViaje.js"></script>
+    <script src="../js/jquery2.js"></script>
+    <script src="../js/jquery-ui.js"></script>
+    <script src="../js/jquery.datetimepicker.min.js"></script>
+    <script src="../js/jquery.datetimepicker.full.min.js"></script>
+    <script src="../js/validate.js"></script>
+    <script>
+        $('.down').click(function () {
+            $(this).next().toggle('slow');
+        });
+        $('.espacio').hide();
+
+        $(function () {
+            $('#dos').datetimepicker({minDate: 0});
+            $('#uno').datetimepicker({
+                minDate: 0,
+                onClose: function (selectedDate) {
+                    $('#dos').datetimepicker({minDate: selectedDate,
+                    onClose:function(selectedDate){
+                        $('#uno').datetimepicker({maxDate: selectedDate})
+                    }
+                    });
+                }
+            });
+        });
+
+        document.addEventListener('deviceready', () => {
+            document.getElementById('vista').addEventListener('click', () => {
+                jQuery.validator.messages.required = "";
+                var validado = $('#tramo1').valid();
+                var validado2 = $('#tramo2').valid();
+                if (validado) {
+                    console.log($('#tramo1').serializeFormJSON());
+                    sessionStorage.setItem('tramo1', JSON.stringify($('#tramo1').serializeFormJSON()));
+                    if (validado2) {
+                        console.log($('#tramo2').serializeFormJSON());
+                        sessionStorage.setItem('tramo2', JSON.stringify($('#tramo2').serializeFormJSON()));
+                    }
+                    window.location =  "vistaprevia.html";
+                }
+                //var form = $('#tramo1').serializeFormJSON();
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/PAQ.css">
+    <link rel="stylesheet" href="../css/envios.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="superior">
+            <div class="text">
+                <p>Mis paquetes</p>
+            </div>
+            <div class="logo">
+                <img src="../img/portfolio.svg">
+            </div>
+        </div>
+        <div class="contenido">
+            <div class="lista">
+
+            </div>
+        </div>
+        <div class="inferior"></div>
+    </div>
+    <script type="text/javascript" src="../cordova.js"></script>
+    <script>
+        document.addEventListener('deviceready', () => {
+            var u = JSON.parse(localStorage.getItem('usuario'));
+            var i = 0;
+            fetch(`http://paq.web-informatica.info/Rest_PAQ/envio/byuser/${u.id}`)
+                .then(data => data.json()).then(data => {
+                    console.log(data)
+                    data.map(d => {
+                        var condicion = (d.idPaquer != 0 && d.idViaje != 0);
+                        document.getElementsByClassName('lista')[0].innerHTML +=
+                            `
+                        <div class="envio" ${ (condicion ? 'onclick="redir()"' : '')}>
+                            <div class="header">
+                                <div class="img"><img src="../img/portfolio.1.svg"></div>
+                                <div class="texto">Envio ${++i}</div>
+                            </div>
+                            <div class="descripcion">
+                                <p>${ (condicion ? `<b>Nombre: </b> ${nombre(d.idPaquer,this)}` : 'En espera')}</p>
+                                <p>${(condicion ? `<b>Fecha: </b>${fecha(d.idViaje,this)}` : '')}</p>
+                            </div>
+                            <div class="boton">
+                                <p>Ver estado</p>
+                                <img src="../img/arrow.svg">
+                            </div>
+                        </div>
+                        `;
+                    });
+                });
+            function redir() {
+                window.location = 'chatCliente.html';
+            }
+            function nombre(id,e) {
+                fetch(`http://paq.web-informatica.info/Rest_PAQ/users/${id}`)
+                    .then(data => data.json()).then(data => { console.log(data);});
+            }
+            function fecha(id,e) {
+                return new Promise((resolver,rejected)=>{
+                    fetch(`http://paq.web-informatica.info/Rest_PAQ/viaje/${id}`)
+                    .then(data => data.json()).then(data => resolver(data));
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+.superior{
+    width: 100%;
+    height: 200px;
+    background: #47aad1;
+    z-index: 1;
+}
+
+.contenido{
+    color: #47aad1;
+    width: 85%;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    background: white;
+    z-index: 2;
+    margin-top: -25%;
+    padding: 0% 3% 3% 3%;
+    z-index: 1;
+}
+
+.contenido h3{
+    display: block;
+    margin-left: 2%;
+}
+
+.tramo{
+    width: 90%;
+    border: 1px solid lightgray;
+    padding: 0% 0% 2% 6.5%;
+    border-radius: 10px;
+    z-index: 1;
+    margin-bottom: 5%;
+}
+
+.tramo span:first-child{
+    margin-left: -6%;
+    padding: 0.5% 3% 0.5% 5%;
+    width: 20%;
+    border-radius: 10px;
+    background: #47aad1;
+    color: white;
+    z-index: 2;
+    display: block;
+    margin-bottom: -3%;
+    margin-top: -3%;
+}
+
+.boton a{
+    width: 30%;
+    display: block;
+    background: #47aad1;
+    color: white;
+    padding: 1.5% 6% 1.5% 6%;
+    border-radius: 10px;
+    z-index: 2;
+    margin-top: -3.5%;
+}
+
+.mensaje{
+    text-align: center;
+    margin-top: 8%;
+    margin-bottom: 8%;
+}

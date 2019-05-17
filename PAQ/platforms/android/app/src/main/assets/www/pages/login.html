@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/PAQ.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="barra"></div>
+        <div class="contenido">
+            <div class="imagen">
+                <img src="../img/logo.png">
+            </div>
+            <h4>Bienvenido a PAQ</h4>
+            <form id="form">
+                <input type="text" name="usuario" placeholder="Usuario o correo electronico">
+                <input type="password" name="pass" id="pass" placeholder="Contraseña">
+            </form>
+            <div class="eye">
+                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 488.85 488.85"
+                    style="enable-background:new 0 0 488.85 488.85;" xml:space="preserve">
+                    <g>
+                        <path id="ojo" d="M244.425,98.725c-93.4,0-178.1,51.1-240.6,134.1c-5.1,6.8-5.1,16.3,0,23.1c62.5,83.1,147.2,134.2,240.6,134.2
+                       s178.1-51.1,240.6-134.1c5.1-6.8,5.1-16.3,0-23.1C422.525,149.825,337.825,98.725,244.425,98.725z M251.125,347.025
+                       c-62,3.9-113.2-47.2-109.3-109.3c3.2-51.2,44.7-92.7,95.9-95.9c62-3.9,113.2,47.2,109.3,109.3
+                       C343.725,302.225,302.225,343.725,251.125,347.025z M248.025,299.625c-33.4,2.1-61-25.4-58.8-58.8c1.7-27.6,24.1-49.9,51.7-51.7
+                       c33.4-2.1,61,25.4,58.8,58.8C297.925,275.625,275.525,297.925,248.025,299.625z" stroke="blue"
+                            stroke-width="5" fill="white" />
+                    </g>
+                </svg>
+            </div>
+            <br>
+            <div class="recordar">
+                <label class="checkbox">Guardar informacion de inicio de sesión
+                    <input type="checkbox" id="cheque">
+                    <span class="check"></span>
+                </label>
+            </div>
+            <div class="boton">
+                <a>Iniciar sesión</a>
+            </div>
+            <div class="reset">
+                <a>¿Has olvidado la contraseña?</a>
+            </div>
+            <div class="reset2">
+                <a>Crear una cuenta</a>
+            </div>
+        </div>
+        <div class="inferior"></div>
+    </div>
+    <script src="../js/jquery2.js"></script>
+    <script>
+        document.getElementsByClassName('eye')[0].addEventListener('click', () => {
+            var ojo = document.getElementById('ojo');
+            var pass = document.getElementById('pass');
+            ojo.classList.toggle('ojo');
+
+            pass.type == 'text' ? pass.type = 'password' : pass.type = 'text'
+        });
+
+        document.getElementsByClassName('reset2')[0].addEventListener('click', () => {
+            window.location.replace("terminos.html");
+        });
+
+        document.getElementsByClassName('boton')[0].addEventListener('click', () => {
+            var a = $('form').serializeFormJSON();
+            $.ajax({
+                url: 'http://paq.web-informatica.info/Rest_PAQ/users/validar',
+                method: 'POST',
+                data: a,
+                success: function (response     ) {
+                    var input = document.getElementById('cheque');
+                    if (response.id !== null && response.id !== undefined) {
+                        if (input.checked) {
+                            localStorage.setItem('usuario', JSON.stringify(response)); 
+                        } else {
+                            sessionStorage.setItem('usuario', JSON.stringify(response));
+                        }
+                        if (response.idRol == 2) {
+                            window.location.replace("menuCliente.html");
+                        } else {
+                            window.location.replace("menuPaquer.html");
+                        }
+                    } else {
+                        alert('Contraseña y/ó usuario incorrecto');
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus);
+                    alert('Contraseña y/ó usuario incorrecto');
+                }
+            });
+
+
+        });
+    </script>
+</body>
+
+</html>

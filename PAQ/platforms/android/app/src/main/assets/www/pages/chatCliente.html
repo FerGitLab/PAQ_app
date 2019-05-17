@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/PAQ.css">
+    <link rel="stylesheet" href="../css/chat.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="barra"></div>
+        <div class="contenido">
+            <div class="logo">
+                <img src="../img/logo.png">
+            </div>
+            <img class="icono" src="../img/update.svg">
+            <p class="titulo" style="color: black"><b>ACTUALIZACION</b></p>
+            <br>
+            <div class="items">
+                <div class="detalle">Paquer saliendo de aeropuerto</div>
+                <div class="detalle">Paquer en escala 1</div>
+                <div class="detalle">Paquer ha llegado al pais</div>
+            </div>
+            <div class="chat">
+                <div class="header">
+                    Chat
+                </div>
+                <div class="mensajes">
+                    <div class="autor">
+                        <div class="titulo">
+                            paquer
+                        </div>
+                        <div class="flecha-izquierda"></div>
+                        <div class="contenido">
+                            Lorem ipssasasasasasum dolor sit amet consectur.
+                        </div>
+                        <div class="fecha">Enviado hace tres minutos</div>
+                    </div>
+                    <div class="amigo">
+                        <div class="titulo">
+                            cliente
+                        </div>
+                        <div class="flecha-izquierda"></div>
+                        <div class="contenido">
+                            Lorem ipssasasasasasum dolor sit amet consectur.
+                        </div>
+                        <div class="fecha">Enviado hace tres minutos</div>
+                    </div>
+                    <div class="autor">
+                        <div class="titulo">
+                            paquer
+                        </div>
+                        <div class="flecha-izquierda"></div>
+                        <div class="contenido">
+                            Lorem ipssasasasasasum dolor sit amet consectur.
+                        </div>
+                        <div class="fecha">Enviado hace tres minutos</div>
+                    </div>
+                </div>
+                <div class="caja-mensaje">
+                    <input type="text" placeholder="Escribe tu mensaje">
+                </div>
+            </div>
+        </div>
+        <div class="boton">
+            <a id="entregar">Enviar</a>
+        </div>
+        <div class="inferior"></div>
+    </div>
+    <script src="../cordova.js"></script>
+    <script>
+        let app = {
+            init: function () {
+                document.getElementById('entregar').addEventListener('click', () => {
+                    window.location = 'qr.html';
+                });;
+            }
+        };
+
+        document.addEventListener('deviceready', app.init);
+    </script>
+</body>
+
+</html>

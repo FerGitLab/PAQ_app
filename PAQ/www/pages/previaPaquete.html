@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/PAQ.css">
+    <link rel="stylesheet" href="../css/previaPaquete.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="superior"></div>
+        <div class="contenido">
+            <p class="titulo">Confirmar paquete</p>
+            <div class="conten">
+                <div class="img">
+                    <img src="../img/box.svg">
+                </div>
+                <div class="datos">
+                    <div class="primeros">
+                        <span id="alto">
+                        </span>
+                        <div class="arrow">
+                            <img src="../img/arrow.svg">
+                        </div>
+                    </div>
+                    <div>
+                        <span id="peso">
+                        </span>
+                        <div class="arrow">
+                            <img src="../img/arrow.svg">
+                        </div>
+                    </div>
+                    <div class="primeros">
+                        <span id="ancho">
+                        </span>
+                        <div class="arrow">
+                            <img src="../img/arrow.svg">
+                        </div>
+                    </div>
+                    <div>
+                        <span id="profundidad">
+                        </span>
+                        <div class="arrow">
+                            <img src="../img/arrow.svg">
+                        </div>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img id="img" >
+                </div>
+            </div>
+            <div class="boton">
+                <a id="pagar">Pagar</a>
+            </div>
+        </div>
+    </div>
+    <script src="../cordova.js"></script>
+    <script>
+        let app = {
+            init: function () {
+                document.getElementById('pagar').addEventListener('click', () => {
+                    window.location = 'paquers.html';
+                });
+
+                var detalle = JSON.parse(localStorage.getItem('detalle'));
+                document.getElementById('img').src = 'data:image/jpg;base64,'+detalle.imagen;
+                document.getElementById('alto').textContent = detalle.altura + ' cm'
+                document.getElementById('ancho').textContent = detalle.ancho + ' cm'
+                document.getElementById('peso').textContent = detalle.peso + ' lb'
+                document.getElementById('profundidad').textContent = detalle.profundidad + ' cm'
+            }
+        };
+
+        document.addEventListener('deviceready', app.init);
+    </script>
+</body>
+
+</html>

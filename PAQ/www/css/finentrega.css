@@ -1,0 +1,122 @@
+*::placeholder{
+    color: lightblue;
+}
+
+.contenido{
+    width: 90%;
+}
+
+.logo{
+    width: 45%;
+}
+
+.logo img{
+    width: 100%;
+}
+
+.box{
+    margin-top: -3%;
+    width: 12%;
+}
+
+.titulo{
+    display: block;
+    width: 36%;
+    font-size: 14px;
+    color: #47aad1;
+}
+.datos{
+    width: 90%;
+}
+
+.datos input{
+    border: 0.5px solid lightblue;
+    width: 95%;
+    margin: 2% 0% 2% 0%;
+    padding: 2%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px -2px #47aad1;
+}
+
+.acciones{
+    margin-top: 5%;
+    display: flex;
+    width: 90%;
+}
+
+.accion{
+    padding: 10% 5.5% 3% 5.5%;
+    width: 38%;
+    background: #47aad1;
+    border-radius: 15px;
+    box-shadow: 0px 6px 10px -2px black;
+}
+
+.accion:first-child{
+    margin-right: 4.5%;
+}
+
+.accion .imagen{
+    width: 80%;
+}
+
+.accion .imagen img{
+    display: block;
+    width: 80%;
+}
+
+.boton{
+    margin-top: 15%;
+}
+
+.accion .boton a{
+    font-size: 13px;
+    color: #47aad1;
+    text-align: center;
+    width: 60%;
+    background: white;
+    display: block;
+    padding: 2.5%;
+    border-radius: 8px;
+}
+
+.siguiente{
+    margin-top: 10%;
+    font-size: 14px;
+}
+
+.siguiente a{
+    display: block;
+    color: white;
+    width: 43%;
+    background: #47aad1;
+    padding: 2.5% 5.5% 2.5% 5.5%;
+    border-radius: 15px;
+}
+
+.calificacion{
+    display: none;
+}
+
+.estrellas{
+    display: flex;
+    margin-top: 15%;
+    margin-bottom: 7%;
+    width: 80%;
+    height: 50px;
+    border: 1px solid #47aad1;
+    border-radius: 25px;
+}
+
+.estrella:first-child{
+    margin-left: 12.5%;
+}
+
+.estrella{
+    margin: 1% 0% 0% 0%;
+    width: 15%;
+}
+
+.estrella img{
+    width: 100%;
+}

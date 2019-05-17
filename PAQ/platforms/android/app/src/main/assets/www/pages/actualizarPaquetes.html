@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/PAQ.css">
+    <link rel="stylesheet" href="../css/actualizar.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="pasos">
+            <div class="paso">
+                <span>Paso 1</span>
+                <div class="info">
+                    <img src="../img/caja.svg"><br>
+                    <span>Desempacar</span>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+            <div class="paso">
+                <span>Paso 2</span>
+                <div class="info">
+                    <img src="../img/foto.svg"><br>
+                    <span>Foto de paquete abierto</span>
+                    <br>
+                    <br>
+                </div>
+            </div>
+            <div class="paso">
+                <span>Paso 3</span>
+                <div class="info">
+                    <img src="../img/box-check.svg"><br>
+                    <span>Producto es igual a lo que reporto el cliente</span>
+                    <br>
+                </div>
+            </div>
+            <div class="paso">
+                <span>Paso 4</span>
+                <div class="info">
+                    <img src="../img/lupa.svg"><br>
+                    <span>Aceptar producto</span>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="contenido" id="contenido">
+            <div class="img"><img src="../img/camara.png"></div>
+            <div class="img"><img src="../img/camara.png"></div>
+            <div class="img"><img src="../img/camara.png"></div>
+            <div id="anomalia">
+                <span>Reportar una anomalia</span><br>
+                <div class="arrow"><img src="../img/arrow.svg"></div>
+            </div>
+            <a class="primero" id="aceptar">Aceptar</a>
+            <a>Rechazar</a>
+        </div>
+    </div>
+    <div class="inferior"></div>
+    <script src="../cordova.js"></script>
+    <script>
+        var img;
+
+        var app = {
+            init: function () {
+                document.getElementById('aceptar').addEventListener('click', () => {
+                    var imagenes = new Array();
+                    Array.from(document.getElementsByClassName('img')).map(e=>{
+                        console.log((e.firstElementChild.src).split('base64,')[1]);
+                    });
+
+                    window.location = "chat.html";
+                });
+                var imgs = Array.from(document.getElementsByClassName('img'));
+                imgs.map(e => e.addEventListener('click', app.camara));
+            },
+            camara: function () {
+                console.log(this);
+                img = this.firstElementChild;
+                navigator.notification.confirm(
+                    '¿Quieres abrir tu camara o tu galeria?',
+                    app.onConfirm,
+                    'Elije una opcion',
+                    ['Camara', 'Galeria']
+                );
+            },
+            tomarPick: function (sourcetype) {
+                let opts = {
+                    quality: 50,
+                    destinationType: Camera.DestinationType.DATA_URL,
+                    sourceType: sourcetype,
+                    mediaType: Camera.MediaType.PICTURE,
+                    encodingType: Camera.EncodingType.JPEG
+                };
+
+                navigator.camera.getPicture(app.ftw, app.wtf, opts);
+            },
+            onConfirm: function (index) {
+                if (index == 1) {
+                    app.tomarPick(Camera.PictureSourceType.CAMERA);
+                }
+                else if (index == 2) {
+                    app.tomarPick(Camera.PictureSourceType.PHOTOLIBRARY);
+                }
+            },
+            ftw: function (imagen) {
+                img.src = `data:image/jpg;base64,${imagen}`;
+                window.plugins.toast.showWithOptions(
+                    {
+                        message: 'Imagen cargada con exito',
+                        duration: 4000,
+                        position: 'center'
+                    }
+                );
+            },
+            wtf: function (mssg) {
+                console.error(('Error: ' + mssg));
+                window.plugins.toast.showWithOptions(
+                    {
+                        message: 'No se ha cargado ningun archivo',
+                        duration: 4000,
+                        position: 'center'
+                    }
+                );
+            }
+        };
+        document.addEventListener('deviceready',app.init);
+    </script>
+</body>
+
+</html>
