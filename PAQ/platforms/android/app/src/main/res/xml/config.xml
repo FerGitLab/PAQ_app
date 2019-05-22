@@ -33,7 +33,7 @@
     <author email="dev@cordova.apache.org" href="http://cordova.io">
         Wen Informatica
     </author>
-    <content src="index.html" />
+    <content src="validador.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

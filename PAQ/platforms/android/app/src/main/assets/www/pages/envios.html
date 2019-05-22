@@ -28,6 +28,7 @@
         <div class="inferior"></div>
     </div>
     <script type="text/javascript" src="../cordova.js"></script>
+    <script src="../js/jquery2.js"></script>
     <script>
         document.addEventListener('deviceready', () => {
             var u = JSON.parse(localStorage.getItem('usuario'));
@@ -37,37 +38,69 @@
                     console.log(data)
                     data.map(d => {
                         var condicion = (d.idPaquer != 0 && d.idViaje != 0);
-                        document.getElementsByClassName('lista')[0].innerHTML +=
+                        if (condicion) {
+                            fetch(`http://paq.web-informatica.info/Rest_PAQ/users/nombre/${d.idPaquer}`).then(data => data.json()).then(u => {
+                                fetch(`http://paq.web-informatica.info/Rest_PAQ/viaje/${d.idViaje}`).then(data => data.json()).then(v => {
+                                    fetch(`http://paq.web-informatica.info/Rest_PAQ/tramo/viaje/${v.id}`).then(data => data.json()).then(t => {
+                                        fetch(`http://paq.web-informatica.info/Rest_PAQ/Envio/viaje/${v.id}`).then(data => data.json()).then(e => {
+                                            document.getElementsByClassName('lista')[0].innerHTML +=
+                                                `
+                                            <div class="envio" onclick="window.location = 'chatCliente.html?id=${e.id}';">
+                                                <div class="header">
+                                                    <div class="img"><img src="../img/portfolio.1.svg"></div>
+                                                    <div class="texto">Envio ${++i}</div>
+                                                    </div>
+                                                <div class="descripcion">
+                                                    <p><b>Nombre: </b>${u.nombres}</p>
+                                                    ${linea(t[0].fecha_hora)}
+                                                </div>
+                                                <div class="boton">
+                                                    <p>Ver estado</p>
+                                                    <img src="../img/arrow.svg">
+                                                </div>
+                                            </div>
+                                            `
+                                        });
+                                    });
+                                });
+                            });
+                        } else {
+                            document.getElementsByClassName('lista')[0].innerHTML +=
+                                `
+                            <div class="envio" >
+                                <div class="header">
+                                    <div class="img"><img src="../img/portfolio.1.svg"></div>
+                                    <div class="texto">Envio ${++i}</div>
+                                </div>
+                                <div class="descripcion">
+                                    <p>En espera</p>
+                                    <span></span><br>
+                                </div>
+                                <div class="boton">
+                                    <p>Ver estado</p>
+                                    <img src="../img/arrow.svg">
+                                </div>
+                            </div>
                             `
-                        <div class="envio" ${ (condicion ? 'onclick="redir()"' : '')}>
-                            <div class="header">
-                                <div class="img"><img src="../img/portfolio.1.svg"></div>
-                                <div class="texto">Envio ${++i}</div>
-                            </div>
-                            <div class="descripcion">
-                                <p>${ (condicion ? `<b>Nombre: </b> ${nombre(d.idPaquer,this)}` : 'En espera')}</p>
-                                <p>${(condicion ? `<b>Fecha: </b>${fecha(d.idViaje,this)}` : '')}</p>
-                            </div>
-                            <div class="boton">
-                                <p>Ver estado</p>
-                                <img src="../img/arrow.svg">
-                            </div>
-                        </div>
-                        `;
+                        }
                     });
                 });
-            function redir() {
-                window.location = 'chatCliente.html';
+            function linea(fecha) {
+                dateTime = fecha.split(" ");
+
+                var date = dateTime[0].split("-");
+                var yyyy = date[0];
+                var mm = date[1];
+                if (mm.length == 2) {
+                    mm = mm[0] == 0 ? mm[1] : mm;
+                }
+                var dd = date[2];
+
+                return `<span><b>Fecha:</b> ${dd} de ${mes(mm)}-${yyyy}</span><br>`;
             }
-            function nombre(id,e) {
-                fetch(`http://paq.web-informatica.info/Rest_PAQ/users/${id}`)
-                    .then(data => data.json()).then(data => { console.log(data);});
-            }
-            function fecha(id,e) {
-                return new Promise((resolver,rejected)=>{
-                    fetch(`http://paq.web-informatica.info/Rest_PAQ/viaje/${id}`)
-                    .then(data => data.json()).then(data => resolver(data));
-                });
+            function mes(index) {
+                var meses = Array.of('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+                return meses[index];
             }
         });
     </script>

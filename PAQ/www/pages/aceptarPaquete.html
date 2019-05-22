@@ -53,9 +53,8 @@
                 .then(data => data.json()).then(data => {
                     console.log(data)
                     fetch(`http://paq.web-informatica.info/Rest_PAQ/envio/aceptar/${data.idEnvio}/${u.id}/${data.idViaje}`)
-                        .then(data => data.text()).then(data => console.log(data))
+                        .then(d => d.text()).then(d => {console.log(d); window.location = "actualizarPaquetes.html?id="+data.idEnvio;})
                 });
-            //window.location = "actualizarPaquetes.html";
         }
 
         function getDatos() {

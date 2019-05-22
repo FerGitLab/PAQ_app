@@ -65,21 +65,42 @@
     </div>
     <div class="inferior"></div>
     <script src="../cordova.js"></script>
+    <script src="../js/jquery2.js"></script>
     <script>
         var img;
+        var id = (window.location.search.substring(1)).split('=')[1];
+        var u = JSON.parse(localStorage.getItem('usuario'));
+        var entrega = {
+            'idPaquer': u.id,
+            'estado': 'En proceso',
+            'idEnvio': id
+        };
+        var chat = {
+            'idEnvio': id,
+            'idPaquer': u.id
+        };
+        console.log(id);
 
         var app = {
             init: function () {
                 document.getElementById('aceptar').addEventListener('click', () => {
                     var imagenes = new Array();
-                    Array.from(document.getElementsByClassName('img')).map(e=>{
-                        console.log((e.firstElementChild.src).split('base64,')[1]);
+                    Array.from(document.getElementsByClassName('img')).map((e, i) => {
+                        (i == 0 ? entrega.foto1 = (e.firstElementChild.src).split('base64,')[1] : i == 1 ? entrega.foto2 = (e.firstElementChild.src).split('base64,')[1] : entrega.foto3 = (e.firstElementChild.src).split('base64,')[1])
+                    });
+                    console.log(entrega);
+                    $.post('http://paq.web-informatica.info/Rest_PAQ/entrega', entrega, (d) => {
+                        fetch(`http://paq.web-informatica.info/Rest_PAQ/envio/${id}`).then(d => d.json()).then(d => {
+                            chat.idCliente = d.idCliente;
+                            $.post('http://paq.web-informatica.info/Rest_PAQ/chat', chat, (d) => {
+                                debugger
+                                window.location = `chat.html?id=${id}`;
+                            });
+                        });
                     });
 
-                    window.location = "chat.html";
                 });
-                var imgs = Array.from(document.getElementsByClassName('img'));
-                imgs.map(e => e.addEventListener('click', app.camara));
+                (Array.from(document.getElementsByClassName('img'))).map(e => e.addEventListener('click', app.camara));
             },
             camara: function () {
                 console.log(this);
@@ -131,7 +152,7 @@
                 );
             }
         };
-        document.addEventListener('deviceready',app.init);
+        document.addEventListener('deviceready', app.init);
     </script>
 </body>
 

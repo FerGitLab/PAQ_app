@@ -27,11 +27,11 @@
                     <input type="text" placeholder="Contenido">
                 </div>
                 <div class="acciones">
-                    <div class="accion">
+                    <div class="accion" id="camara">
                         <div class="imagen">
                             <img src="../img/camera.svg">
                         </div>
-                        <div class="boton" id="camara">
+                        <div class="boton">
                             <a>Tomar foto</a>
                         </div>
                     </div>
@@ -71,8 +71,63 @@
     </div>
     <script src="../cordova.js"></script>
     <script>
+        let app2 = {
+            init: function () {
+                document.getElementById('camara').addEventListener('click',app2.camara);
+            },
+            camara: function () {
+                console.log(this);
+                img = this.firstElementChild;
+                navigator.notification.confirm(
+                    '¿Quieres abrir tu camara o tu galeria?',
+                    app2.onConfirm,
+                    'Elije una opcion',
+                    ['Camara', 'Galeria']
+                );
+            },
+            tomarPick: function (sourcetype) {
+                let opts = {
+                    quality: 50,
+                    destinationType: Camera.DestinationType.DATA_URL,
+                    sourceType: sourcetype,
+                    mediaType: Camera.MediaType.PICTURE,
+                    encodingType: Camera.EncodingType.JPEG
+                };
+
+                navigator.camera.getPicture(app2.ftw, app2.wtf, opts);
+            },
+            onConfirm: function (index) {
+                if (index == 1) {
+                    app2.tomarPick(Camera.PictureSourceType.CAMERA);
+                }
+                else if (index == 2) {
+                    app2.tomarPick(Camera.PictureSourceType.PHOTOLIBRARY);
+                }
+            },
+            ftw: function (imagen) {
+                alert(imagen);
+                window.plugins.toast.showWithOptions(
+                    {
+                        message: 'Imagen cargada con exito',
+                        duration: 4000,
+                        position: 'center'
+                    }
+                );
+            },
+            wtf: function (mssg) {
+                console.error(('Error: ' + mssg));
+                window.plugins.toast.showWithOptions(
+                    {
+                        message: 'No se ha cargado ningun archivo',
+                        duration: 4000,
+                        position: 'center'
+                    }
+                );
+            }
+        };
         let app = {
             init: function () {
+                app2.init();
                 document.getElementById('siguiente').addEventListener('click', () => {
                     var entrega = document.getElementById('entrega');
                     var calificacion = document.getElementById('calificacion');

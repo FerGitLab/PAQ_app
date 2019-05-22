@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        if (localStorage.getItem('usuario') !== null && localStorage.getItem('usuario') !== undefined) {
+            var u = JSON.parse(localStorage.getItem('usuario'));
+            fetch(`http://paq.web-informatica.info/Rest_PAQ/entrega/activos/${u.id}`).then(data => data.json())
+                .then(da => {
+                    if (da.length == 0) {
+                        location.replace('index.html');
+                    } else {
+                        da.map(d => {
+                            var a = (d.mes == 0 && d.anio == 0 && d.dia <= 0 && d.e_entrega == 'En proceso');
+                            if (a) {
+                                location.replace(`pages/chat.html?id=${d.envio}`)
+                            } else {
+                                location.replace('index.html');
+                            }
+                        });
+                    }
+                });
+        } else {
+            location.replace('index.html');
+        }
+    </script>
+</body>
+
+</html>

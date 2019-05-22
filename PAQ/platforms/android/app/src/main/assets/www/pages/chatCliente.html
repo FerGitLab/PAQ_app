@@ -29,59 +29,104 @@
                 <div class="header">
                     Chat
                 </div>
-                <div class="mensajes">
-                    <div class="autor">
-                        <div class="titulo">
-                            paquer
-                        </div>
-                        <div class="flecha-izquierda"></div>
-                        <div class="contenido">
-                            Lorem ipssasasasasasum dolor sit amet consectur.
-                        </div>
-                        <div class="fecha">Enviado hace tres minutos</div>
-                    </div>
-                    <div class="amigo">
-                        <div class="titulo">
-                            cliente
-                        </div>
-                        <div class="flecha-izquierda"></div>
-                        <div class="contenido">
-                            Lorem ipssasasasasasum dolor sit amet consectur.
-                        </div>
-                        <div class="fecha">Enviado hace tres minutos</div>
-                    </div>
-                    <div class="autor">
-                        <div class="titulo">
-                            paquer
-                        </div>
-                        <div class="flecha-izquierda"></div>
-                        <div class="contenido">
-                            Lorem ipssasasasasasum dolor sit amet consectur.
-                        </div>
-                        <div class="fecha">Enviado hace tres minutos</div>
-                    </div>
+                <div class="mensajes" id="mensajes">
+
                 </div>
                 <div class="caja-mensaje">
-                    <input type="text" placeholder="Escribe tu mensaje">
+                    <input type="text" id="mensaje" placeholder="Escribe tu mensaje">
                 </div>
             </div>
         </div>
         <div class="boton">
-            <a id="entregar">Enviar</a>
+            <a id="enviar">Enviar</a>
+            <a id="entregar">Entregar</a>
         </div>
         <div class="inferior"></div>
     </div>
     <script src="../cordova.js"></script>
+    <script src="../js/jquery2.js"></script>
     <script>
+        var id = (location.search.substring(1)).split('=')[1];
+        var u = JSON.parse(localStorage.getItem('usuario'));
+        var chat = 0;
+
+        function listar() {
+            var contenedor = document.getElementById('mensajes');
+            var inner = '';
+            var indice = 1;
+            fetch(`http://paq.web-informatica.info/Rest_PAQ/chat/buscar/${id}`).then(data => data.json())
+                .then(d => {
+                    chat = d.id;
+                    fetch(`http://paq.web-informatica.info/Rest_PAQ/mensaje/mensajes/${d.id}`).then(d => d.text()).then(data => {
+                        try {
+                            return JSON.parse(data)
+                        } catch (e) {
+                            return {};
+                        }
+                    }).then(d => {
+                        d.map(m => {
+                            inner += mensaje(m.nombres, m.contenido, m.fecha, (u.id == m.id ? 'autor' : 'amigo'));
+                            if (indice == d.length) (() => {contenedor.innerHTML = inner, posicionar()})()
+                            indice++;
+                        });
+                    })
+                });
+        }
+        (() => listar())();
         let app = {
             init: function () {
                 document.getElementById('entregar').addEventListener('click', () => {
                     window.location = 'qr.html';
-                });;
+                });
+                document.getElementById('enviar').addEventListener('click', () => {
+                    var fecha = new Array();
+                    fecha[0] = format(new Date().toLocaleDateString());
+                    fecha[1] = new Date().toLocaleTimeString();
+                    var mensaje = {
+                        'idChat': chat,
+                        'contenido': document.getElementById('mensaje').value,
+                        'fecha': fecha.join(' '),
+                        'idUsuario': u.id
+                    };
+                    console.log(mensaje)
+                    $.post('http://paq.web-informatica.info/Rest_PAQ/mensaje', mensaje, d => listar());
+                    document.getElementById('mensaje').value = '';
+                });
             }
         };
 
         document.addEventListener('deviceready', app.init);
+
+        function mensaje(nombre, contenido, fecha, tipo) {
+            if (tipo == 'autor') {
+                return `
+                <div class="amigo">
+                    <div class="titulo">${nombre}</div>
+                    <div class="flecha-izquierda"></div>
+                    <div class="contenido">${contenido}</div>
+                    <div class="fecha">${fecha}</div>
+                </div>
+            `
+            } else {
+                return `
+                <div class="autor">
+                    <div class="titulo">${nombre}</div>
+                    <div class="flecha-izquierda"></div>
+                    <div class="contenido">${contenido}</div>
+                    <div class="fecha">${fecha}</div>
+                </div>
+            `}
+        }
+
+        function format(f) {
+            var fecha = f.split('/');
+            return fecha[2] + "/" + fecha[1] + "/" + fecha[0]
+        }
+
+        function posicionar() {
+            var objDiv = document.getElementById("mensajes");
+            objDiv.scrollTop = objDiv.scrollHeight;
+        }
     </script>
 </body>
 

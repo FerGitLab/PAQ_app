@@ -65,9 +65,25 @@
                 console.log(data);
                 fetch(`http://paq.web-informatica.info/Rest_PAQ/envio/${data.idEnvio}`).then(d => d.json()).then(d => {
                     console.log(d);
-                    if (d.idPaquer == u.id) window.location = `chat.html`;
-                    else if (d.idPaquer == 0 && d.idViaje == 0) window.location = `aceptarPaquete.html?idDetalle=${data.idEnvio}&id=${data.id}`;
-                    else alert('El paquete ya ha sido aceptado'), history.back();
+                    if (d.idPaquer == u.id) {
+                        fetch(`http://paq.web-informatica.info/Rest_PAQ/Chat/buscar/${data.idEnvio}`)
+                            .then(d => d.text()).then(d => {
+                                try {
+                                    JSON.parse(d)
+                                    return JSON.parse(d)
+                                } catch (e) {
+                                    return {};
+                                }
+                            })
+                            .then(d => {
+                                (Object.keys(d).length > 0 ? window.location = `chat.html?id=${data.idEnvio}` : window.location = `actualizarPaquetes.html?id=${data.idEnvio}`)
+                            });
+                    } else if (d.idPaquer == 0 && d.idViaje == 0) {
+                        window.location = `aceptarPaquete.html?idDetalle=${data.idEnvio}&id=${data.id}`;
+                    } else {
+                        alert('El paquete ya ha sido aceptado');
+                        history.back();
+                    }
                 });
             });
         }
