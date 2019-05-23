@@ -176,7 +176,7 @@ input {
 
 .inferior{
     z-index: 1;
-    height: 230px;
+    height: 35vh;
     background: #47aad1;
     margin-top: -28%;
 }

@@ -25,17 +25,12 @@
             <input type="email" name="correo" id="correo" placeholder="correo">
             <input type="text" name="celular" id="celular" placeholder="Celular">
             <input type="text" name="usuario" id="usuario" placeholder="Usuario">
-            <input type="text" name="contrasena" id="contrasena" placeholder="Contraseña"> <br>
+            <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña"> <br>
         </div>
         <div class="boton">
             <a id="enviar">Siguiente</a>
         </div>
         <div class="inferior"></div>
-    </div>
-    <a href="#popupBasic" style="display: none" id="popup" data-rel="popup"
-        class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-transition="pop">Basic Popup</a>
-    <div data-role="popup" id="popupBasic">
-        <p>Ingrese un correo valido</p>
     </div>
     <script src="../cordova.js"></script>
     <script src="../js/mask.js"></script>
@@ -49,25 +44,40 @@
                 var correo = document.getElementById('correo').value;
                 var usuario = document.getElementById('usuario').value;
                 var contrasena = document.getElementById('contrasena').value;
-                debugger
                 var rol = localStorage.getItem('rol');
-                if (isValidEmail(correo)) {
-                    var usuario = {
-                        nombre,
-                        apellido,
-                        direccion,
-                        celular,
-                        correo,
-                        usuario,
-                        contrasena,
-                        estado: true,
-                        idRol: rol
-                    };
-                    localStorage.setItem('usuario', JSON.stringify(usuario));
-                    window.location.replace("validar.html");
+                if (notEmpty(nombre) && notEmpty(apellido) && notEmpty(direccion)
+                    && notEmpty(celular) && notEmpty(correo) && notEmpty(usuario) && notEmpty(contrasena)) {
+                    if (isValidEmail(correo)) {
+                        var usuario = {
+                            nombre,
+                            apellido,
+                            direccion,
+                            celular,
+                            correo,
+                            usuario,
+                            contrasena,
+                            estado: true,
+                            idRol: rol
+                        };
+                        localStorage.setItem('user', JSON.stringify(usuario));
+                        window.location = "validar.html";
+                    } else {
+                        window.plugins.toast.showWithOptions(
+                            {
+                                message: 'El correo no es valido',
+                                duration: 4000,
+                                position: 'center'
+                            }
+                        );
+                    }
                 } else {
-                    document.getElementById('correo').style.border = '1px solid red';
-                    document.getElementById('popup').click();
+                    window.plugins.toast.showWithOptions(
+                        {
+                            message: 'Debe llenar todos los campos',
+                            duration: 4000,
+                            position: 'center'
+                        }
+                    );
                 }
             });
             $('#celular').mask('9999-9999');
@@ -93,6 +103,12 @@
 
         function isValidEmail(mail) {
             return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(mail);
+        }
+
+        function notEmpty(field) {
+            field = field.trim();
+            console.log(field != null && field != undefined)
+            return (field != null && field != undefined && field != "");
         }
     </script>
 </body>

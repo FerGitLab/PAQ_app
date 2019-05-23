@@ -16,7 +16,7 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function (id) {
         document.getElementById('enviar').addEventListener('click', () => {
-            var c = localStorage.getItem('usuario');
+            var c = localStorage.getItem('usuario') != null ? localStorage.getItem('usuario') : sessionStorage.getItem('usuario');
             if (c === undefined || c === null || c === '') {
                 localStorage.setItem('rol', 2);
                 window.location = "pages/login.html";
@@ -26,7 +26,7 @@ var app = {
         });
 
         document.getElementById('entregar').addEventListener('click', () => {
-            var u = localStorage.getItem('usuario');
+            var u = localStorage.getItem('usuario') != null ? localStorage.getItem('usuario') : sessionStorage.getItem('usuario');
             if (u === undefined || u === null || u === '') {
                 localStorage.setItem('rol', 3);
                 window.location = "pages/login.html";

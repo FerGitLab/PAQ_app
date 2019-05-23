@@ -42,25 +42,65 @@
     <script src="../js/jquery2.js"></script>
     <script src="../js/mask.js"></script>
     <script>
+        var boolDui = false;
         document.addEventListener('deviceready', () => {
-            document.getElementById('dui').addEventListener('blur',()=> validar(document.getElementById('dui').value));
+            document.getElementById('dui').addEventListener('blur', () => validar(document.getElementById('dui').value));
 
             $('#dui').mask('99999999-9');
 
             document.getElementById('siguiente').addEventListener('click', () => {
-                var u = JSON.parse(localStorage.getItem('usuario'));
-                var dui = document.getElementById('dui').value;
-                var pasaporte = document.getElementById('pasaporte').value;
-                if (dui.length > 0 && pasaporte.length > 0) {
-                    u.DUI = dui;
-                    u.pasaporte = pasaporte;
-                    localStorage.setItem('usuario',JSON.stringify(u));
-                    window.location.replace("dudas.html");
+                var u = JSON.parse(localStorage.getItem('user'));
+                var dui = (document.getElementById('dui').value).trim();
+                var pasaporte = (document.getElementById('pasaporte').value).trim();
+                if (dui.length > 0 && pasaporte.length > 0 && boolDui) {
+                    fetch(`http://paq.web-informatica.info/Rest_PAQ/users/dui/${dui}`).then(d => d.text())
+                        .then(d => {
+                            try {
+                                var r = JSON.parse(d)
+                                return r;
+                            } catch (error) {
+                                return {};
+                            }
+                        }).then(d => {
+                            console.log(JSON.stringify(d) == '{}')
+                            if (JSON.stringify(d) == '{}') {
+                                u.DUI = dui;
+                                u.pasaporte = pasaporte;
+                                if (u.perfil != null && u.dui != null && u.pasaporte_img != null) {
+                                    localStorage.setItem('user', JSON.stringify(u));
+                                    window.location.replace("dudas.html");
+                                } else {
+                                    window.plugins.toast.showWithOptions(
+                                        {
+                                            message: 'Debe cargar las imagenes requeridas',
+                                            duration: 4000,
+                                            position: 'center'
+                                        }
+                                    );
+                                }
+                            } else {
+                                window.plugins.toast.showWithOptions(
+                                    {
+                                        message: 'El numero de dui ya esta registrado',
+                                        duration: 4000,
+                                        position: 'center'
+                                    }
+                                );
+                            }
+                        });
+                } else {
+                    window.plugins.toast.showWithOptions(
+                        {
+                            message: 'Debe llenar los campos',
+                            duration: 4000,
+                            position: 'center'
+                        }
+                    );
                 }
             });
         });
 
-        function validar (dui) {
+        function validar(dui) {
             var mensaje = document.getElementById('mensaje');
             mensaje.style.fontSize = '11px';
             var suma = parseInt(0);
@@ -73,9 +113,11 @@
             if (verificador === residuo || residuo === 0) {
                 mensaje.style.color = 'green';
                 mensaje.textContent = '';
+                boolDui = true;
             } else {
                 mensaje.style.color = 'red';
                 mensaje.textContent = 'DUI incorrecto';
+                boolDui = false;
             }
         }
     </script>

@@ -2,7 +2,7 @@ var acc;
 var perfil;
 var DUI_img;
 var pasaporte_img;
-var usuario = JSON.parse(localStorage.getItem('usuario'));
+var usuario = JSON.parse(localStorage.getItem('user'));
 let app = {
     init: function () {
         var imgs = Array.from(document.getElementsByClassName('upload'));
@@ -29,7 +29,7 @@ let app = {
     },
     success: function (imagen) {
         (acc == 'perfil' ? usuario.perfil = imagen : acc == 'DUI_img' ? usuario.dui = imagen : usuario.pasaporte_img = imagen)
-        localStorage.setItem('usuario', JSON.stringify(usuario));
+        localStorage.setItem('user', JSON.stringify(usuario));
 
         window.plugins.toast.showWithOptions(
             {

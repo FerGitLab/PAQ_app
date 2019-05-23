@@ -10,7 +10,7 @@
 
 .inferior{
     width: 100%;
-    height: 250px;
+    height: 50vh;
     margin-top: -40%;
     z-index: 1;
     background: #47aad1;

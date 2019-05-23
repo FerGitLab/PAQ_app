@@ -30,7 +30,7 @@
     <script>
         document.addEventListener('deviceready', () => {
             document.getElementById('siguiente').addEventListener('click', () => {
-                var usuario = JSON.parse(localStorage.getItem('usuario'));
+                var usuario = JSON.parse(localStorage.getItem('user'));
                 var form = new FormData();
                 form.append('nombres', usuario.nombre);
                 form.append('apellidos', usuario.apellido);
@@ -51,17 +51,10 @@
                 guardar.onload = () => {
                     var res = JSON.parse(guardar.responseText);
                     if (guardar.readyState == 4 && guardar.status == '200') {
-                        console.log(res); debugger
+                        console.log(res);
                         usuario.id = res;
                         localStorage.setItem('usuario',JSON.stringify(usuario));
-                        window.plugins.toast.showWithOptions(
-                            {
-                                message: res,
-                                duration: 4000,
-                                position: 'center'
-                            }
-
-                        );
+                        console.log(res)
                         if (usuario.idRol == 2) {
                             localStorage.setItem('cliente', 'true');
                             window.location.replace("menuCliente.html");

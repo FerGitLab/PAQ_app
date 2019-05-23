@@ -26,6 +26,7 @@
             </div>
             <div class="ubicacion">
                 <p>Ingresa ubicacion actual</p>
+                <br>
                 <input type="text">
             </div>
         </div>
@@ -34,6 +35,10 @@
         </div>
         <div class="inferior"></div>
     </div>
+    <script>
+        fetch('http://paq.web-informatica.info/Rest_PAQ/track/validar/12').then(data => data.json())
+        .then(data => console.log(data));
+    </script>
 </body>
 
 </html>

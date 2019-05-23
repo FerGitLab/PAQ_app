@@ -1,8 +1,8 @@
-::placeholder{
+::placeholder {
     color: #47aad1;
 }
 
-.contenido{
+.contenido {
     width: 90%;
     border: 1px solid lightgray;
     border-radius: 20px;
@@ -12,24 +12,23 @@
     position: relative;
 }
 
-.contenido .icono{
+.contenido .icono {
     width: 12%;
     margin-left: 43%;
 }
 
-
-.contenido .titulo{
+.contenido .titulo {
     text-align: center;
     font-size: 14px;
     color: #47aad1;
     margin-bottom: 1.5%;
 }
 
-.items{
+.items {
     width: 100%;
 }
 
-.items input{
+.items input {
     display: inline-block;
     width: 35%;
     padding: 2%;
@@ -41,45 +40,51 @@
 }
 
 /*estilo de chat*/
-.chat{
-    width: 100%; 
+
+.chat {
+    width: 100%;
 }
 
-.header{
-    background-color: #47aad1; 
+.header {
+    background-color: #47aad1;
     color: white;
     width: 100%;
     padding: 2.5% 0% 2.5% 0%;
-    text-align: center; 
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.6); 
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-.caja-mensaje{ 
-    width: 100%; 
-} 
-.caja-mensaje input{
+.caja-mensaje {
+    width: 100%;
+}
+
+.caja-mensaje input {
     padding: 2%;
     width: 90%;
     display: block;
     margin-top: 4%;
     margin-bottom: 2%;
-} 
+}
 
-.mensajes{
-    width: 100%; 
-    overflow: hidden; 
-    overflow-y: scroll ;
+.mensajes {
+    width: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
     height: 250px;
-} 
+}
 
-.chat .mensajes .autor .titulo, .chat .mensajes .amigo .titulo{
-    display: inline-block; 
+.chat .mensajes .autor .titulo, .chat .mensajes .amigo .titulo {
+    display: inline-block;
+    text-align: left;
     font-size: 14px;
-    width: 20%;
+    width: 90%;
     margin-top: 6%;
     margin-bottom: -3%;
+    margin-left: 1%;
 }
+
 /*autor*/
+
 .chat .mensajes .autor {
     margin-left: 1%;
 }
@@ -88,103 +93,101 @@
     margin-right: 1%;
 }
 
-.chat .mensajes .autor .contenido{ 
-    background-color: white; 
-    border-radius: 5px; 
-    box-shadow: 2px 2px 3px rgba(0,0,0,0.3); 
-    display: inline-block; 
-    font-size: 13px; 
+.chat .mensajes .autor .contenido {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+    display: inline-block;
+    font-size: 13px;
     padding: 15px;
     width: 280px;
     margin-top: 2.5%;
     color: #47aad1;
-} 
-.chat .mensajes .autor .fecha{ 
-    color: #777; 
-    font-style: italic; 
-    font-size: 13px; 
-    text-align: right; 
-    margin-right: 35px; 
-    margin-top: 10px; 
-} 
-.chat .mensajes .autor .flecha-izquierda{ 
-    display: inline-block; 
-    margin-right: -6px; 
-    margin-top: 10px; 
-    width: 0;  
-    height: 0;  
-    border-top: 0px solid transparent; 
-    border-bottom: 15px solid transparent; 
-    border-right: 15px solid white; 
 }
+
+.chat .mensajes .autor .fecha {
+    color: #777;
+    font-style: italic;
+    font-size: 13px;
+    text-align: right;
+    margin-right: 35px;
+    margin-top: 10px;
+}
+
+.chat .mensajes .autor .flecha-izquierda {
+    display: inline-block;
+    margin-right: -6px;
+    margin-top: 10px;
+    width: 0;
+    height: 0;
+    border-top: 0px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-right: 15px solid white;
+}
+
 /*amigo*/
 
-.chat .mensajes .amigo{ 
+.chat .mensajes .amigo {
     margin-bottom: 2%;
     float: right;
-} 
-.chat .mensajes .amigo .contenido{ 
-    background-color: #47aad1; 
-    border-radius: 5px; 
-    color: white; 
-    display: inline-block; 
-    font-size: 13px; 
-    padding: 15px; 
-    vertical-align: top; 
+}
+
+.chat .mensajes .amigo .contenido {
+    background-color: #47aad1;
+    border-radius: 5px;
+    color: white;
+    display: inline-block;
+    font-size: 13px;
+    padding: 15px;
+    vertical-align: top;
     width: 280px;
     margin-top: 2.5%;
-} 
-.chat .mensajes .amigo .flecha-derecha{ 
-    display: inline-block; 
-    margin-left: -6px; 
-    margin-top: 10px; 
-    width: 0;  
-    height: 0;  
-    border-top: 0px solid transparent; 
-    border-bottom: 15px solid transparent; 
-    border-left: 15px solid #3990BF; 
-} 
+}
 
-.chat .mensajes .amigo .fecha{ 
-    color: #777; 
-    font-style: italic; 
-    font-size: 13px; 
-    text-align: left; 
-    margin-top: 10px; 
-} 
+.chat .mensajes .amigo .flecha-derecha {
+    display: inline-block;
+    margin-left: -6px;
+    margin-top: 10px;
+    width: 0;
+    height: 0;
+    border-top: 0px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 15px solid #3990BF;
+}
+
+.chat .mensajes .amigo .fecha {
+    color: #777;
+    font-style: italic;
+    font-size: 13px;
+    text-align: left;
+    margin-top: 10px;
+}
+
 /*estilo de chat*/
 
-.logo{
+.logo {
     width: 40%;
     z-index: 3;
     margin-top: -10%;
     background: white;
 }
 
-.logo img{
+.logo img {
     width: 80%;
 }
 
-.inferior{
-    width: 100%;
-    height: 320px;
-    z-index: 1;
-    margin-top: -70%;
-    background: #47aad1;
-}
-
-.boton{
+.boton {
     width: 90%;
     z-index: 2;
     position: relative;
     margin-left: 5%;
 }
 
-a:first-of-type{
+a:first-of-type {
     margin-left: 19%;
 }
 
-a{
+a {
     background: #47aad1;
     color: white;
     display: inline-block;
@@ -198,7 +201,8 @@ a{
 }
 
 /*Chat de los clientes*/
-.detalle{
+
+.detalle {
     border: 1px solid lightblue;
     background: lightblue;
     opacity: .8;
@@ -210,7 +214,7 @@ a{
     box-shadow: 0px 0px 5px -2px black;
 }
 
-.detalle:last-child{
+.detalle:last-child {
     background: none;
     margin-bottom: 3%;
 }
@@ -219,10 +223,12 @@ a{
     width: 10%;
     margin-left: 41%;
 }
-.box img{
+
+.box img {
     width: 100%;
 }
-.texto{
+
+.texto {
     width: 40%;
     font-size: 13px;
     text-align: center;
@@ -230,7 +236,8 @@ a{
     margin-top: 1.5%;
     color: #47aad1;
 }
-.qr{
+
+.qr {
     margin-top: 5%;
     width: 170px;
     height: 170px;
@@ -238,19 +245,22 @@ a{
     border-radius: 10px;
     background: #47aad1;
 }
-.codigo{
+
+.codigo {
     margin-top: 9px;
 }
-.descripcion{
+
+.descripcion {
     width: 85%;
     font-size: 12px;
     margin-top: 5%;
-    margin-bottom: 25%;    
+    margin-bottom: 25%;
 }
-.inferior{
-    margin-top: -15%;
+
+.inferior {
+    margin-top: -30%;
     z-index: 1;
     width: 100%;
     background: #47aad1;
-    height: 150px;
+    height: 20vh;
 }

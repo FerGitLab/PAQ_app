@@ -22,7 +22,10 @@
                 <img src="../img/box.svg">
             </div>
             <div class="confirmar">
-
+                <span>Su orden sera procesada por un valor de $99.99</span><br>
+                <br>
+                <br>
+                <div id="paypal-button-container"></div>
             </div>
             <div class="confirmado">
                 <span>Transaccion confirmada</span>
@@ -30,10 +33,6 @@
             </div>
         </div>
         <div class="boton">
-            <div class="confirmar">
-                <span>Su orden sera procesada por un valor de $99.99</span><br>
-                <div id="paypal-button-container"></div>
-            </div>
             <div class="confirmado">
                 <span>No. transaccion 9999999999999</span><br>
                 <a id="volver" class="volver">Volver</a>
@@ -43,8 +42,7 @@
     </div>
     <script src="../cordova.js"></script>
     <script src="../js/jquery2.js"></script>
-    <script
-        src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
     <script>
         //ATSKXPpuuQBUbhjGteU9ccyxGVDnyD3yuqZW5imyweIudwTUa-eKNNw0FlNncpnmqsmgw5-X6l6jaREl
         let app = {
@@ -75,17 +73,17 @@
                     onApprove: function (data, actions) {
                         return actions.order.capture().then(function (details) {
                             // Show a success message to the buyer
+                            notificaciones();
                             for (i = 0; i < mostrar.length; i++) {
                                 mostrar[i].style.display = "block";
                                 ocultar[i].style.display = "none";
                             }
-                            notificaciones();
                         });
                     }
                 }).render('#paypal-button-container');
 
                 document.getElementById('volver').addEventListener('click', () => {
-                    window.location ='../index.html';
+                    window.location = '../index.html';
                 });
                 //(((document.body.firstElementChild).firstElementChild).firstElementChild).parentNode.removeChild(((document.body.firstElementChild).firstElementChild).firstElementChild)
             }
@@ -100,12 +98,13 @@
                 detalle.idEnvio = data;
                 $.post('http://paq.web-informatica.info/Rest_PAQ/detalle', detalle, e => {
                     console.log(e);
-                })
-                viajes.forEach(e => {
-                    $.get(`http://paq.web-informatica.info/Rest_PAQ/notificacion/crear/${e}/${data}`, d => {
-                        console.log(d);
+                    viajes.forEach(e => {
+                        $.get(`http://paq.web-informatica.info/Rest_PAQ/notificacion/crear/${e}/${data}`, d => {
+                            console.log(d);
+                        });
                     });
-                });
+                })
+
             });
         }
     </script>
